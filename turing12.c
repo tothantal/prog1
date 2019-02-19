@@ -2,9 +2,6 @@
 
 int main()
 {
-	#pragma omp parallel for
-	for (; ;)
-	{
-		;
-	}
+	#pragma omp parallel
+	while(1){};
 }
