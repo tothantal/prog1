@@ -72,6 +72,14 @@
         }
 ]]>
         </programlisting>
+	    
+	<para>
+		Egy konstans olyan változó, amelyet nem tervezünk a programon belül megváltoztatni. C-ben konstansok megadása a 
+		#define kulcsszóval történik. Példaként a #define MAX_KULCS 100 egy MAX_KULCS nevű konstans változót deklarál,
+		amelynek az értéke 100. C-ben a konstansokat hagyományosan csupa nagybetűkkel jelőljük.
+		A main függvényen belüli strlen() és strncpy() függvények a string.h fájlban vannak definiálva. A strlen() a paraméterül
+		kapott string hosszát adja vissza eredményül, a strncpy pedig 
+	</para>
     </section>        
     <section>
         <title>Java EXOR titkosító</title>
