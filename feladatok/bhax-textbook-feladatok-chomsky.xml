@@ -51,8 +51,25 @@
             Megoldás forrása:  
         </para>
         <para>
-            Tanulságok, tapasztalatok, magyarázat...
+		<![CDATA[
+        #include <stdio.h>
+	// compiles in C99, not in C89
+	// -std=C99
+
+	int main()
+	{
+	int n = 5;
+	for (int i = 0; i < n; ++i) {};
+	}
+		]]>
         </para>
+	    
+	<para>
+	A fenti kód a C nyelv C99-es és újabb verzióiban lefordul, de azelőttiben, mint a C89 nem, mert
+	a C99-es verzió megjelenése előtt a for ciklusok fejlécében nem lehetett változót inicializálni.
+ 	Adott verzióval úgy lehet programot fordítani, hogy ha (gcc és C99-es verzió esetén) a következőképpen adjuk meg az
+	utasítást: gcc programnev.c -std=C99
+	</para>
     </section>                     
 
     <section>
@@ -162,7 +179,7 @@ Norbert Bátfai, batfai.norbert@inf.unideb.hu
   {'n', {"n", "|\\|", "/\\/", "/V"}},
   {'o', {"0", "0", "()", "[]"}},
   {'p', {"p", "/o", "|D", "|o"}},
-  {'q', {"q", "9", "O_", "(,)"}},
+  {'q', {"q, "9", "O_", "(,)"}},
   {'r', {"r", "12", "12", "|2"}},
   {'s', {"s", "5", "$", "$"}},
   {'t', {"t", "7", "7", "'|'"}},
@@ -193,16 +210,16 @@ Norbert Bátfai, batfai.norbert@inf.unideb.hu
 	  
 	  int found = 0;
 	  for(int i=0; i<L337SIZE; ++i)
-	  {
+	  
 	  
 	    if(l337d1c7[i].c == tolower(*yytext))
 	    {
 	    
 	      int r = 1+(int) (100.0*rand()/(RAND_MAX+1.0));
 	    
-          if(r<91)
+              if(r<91)
 	        printf("%s", l337d1c7[i].leet[0]);
-          else if(r<95)
+              else if(r<95)
 	        printf("%s", l337d1c7[i].leet[1]);
 	      else if(r<98)
 	        printf("%s", l337d1c7[i].leet[2]);
@@ -219,17 +236,26 @@ Norbert Bátfai, batfai.norbert@inf.unideb.hu
 	     printf("%c", *yytext);	  
 	  
 	}
-%%
-int 
-main()
-{
-  srand(time(NULL)+getpid());
-  yylex();
-  return 0;
-}
+	%%
+	int 
+	main()
+	{
+ 	srand(time(NULL)+getpid());
+ 	yylex();
+  	return 0;
+	}
 
           ]]>
         </programlisting>
+	<para>
+		Ez egy lexer által írt program, ami ha lefut, az input stringben betűnkénti helyettesítést végez. 
+		A program elején egy struktúra van megadva, ami lehetővé teszi a saját típusunk deklarálását.
+		Itt a megadott cipher típushoz tartozik egy c karakter és egy leet karakterre mutató mutatók négyelemű tömbje. 
+		Ezután inicializáljuk a cipher típusú l337d1c7 tömbünket. Ezzel véget ér a definícók része.
+		A program következő részében egy for ciklus található, ami végigmegy a l337d1c7 tömbön és megkeresi a betűt, amit
+		inputba megkapott a program, majd generál egy véletlenszerű számot 1-től 100-ig és az eredménytől függően
+		kiválasztja az adott c karakterhez tartozó leet helyettesítési értéket.
+	</para>
     </section>                     
 
 
@@ -295,7 +321,24 @@ main()
         </para>
 
         <para>
-            Tanulságok, tapasztalatok, magyarázat...
+            for(i=0; i<5; ++i): Legyen i egyenlő 0, ha i kisebb 5-nél akkor inkrementálja egyel, majd nézze meg i értékét újra.
+	    Mivel itt i nincs deklarálva, ezért ez a program nem fog lefutni.
+	    for(i=0; i<5; i++): Legyen i egyenlő 0, ha i kisebb 5-nél akkor nézze meg i értékét újra, majd inkrementálja egyel.
+	    Mivel itt i nincs deklarálva, ezért ez a program nem fog lefutni.
+	    for(i=0; i<5; tomb[i] = i++): Legyen i egyenlő 0, ha i kisebb 5-nél a tomb nevű tömb i-edik eleme legyen egyenlő
+	    i-vel, inkrementálja i-t, majd folytassa a for ciklust.
+	    Mivel itt i nincs deklarálva, ezért ez a program nem fog lefutni.
+	    for(i=0; i<n && (*d++ = *s++); ++i): Legyen i egyenlő 0, ha i kisebb n-nél és a s mutató egyenlő az s mutatóval,
+	    inkrementálja őket, majd i-t is inkrementálja és folytassa a for ciklust. 
+	    Mivel itt i nincs deklarálva, ezért ez a program nem fog lefutni.
+	    printf("%d %d", f(a, ++a), f(++a, a)); : a printf() függvény kiírja az f(a, ++a) és f(++a, a) értékeket egymás mellé,
+	    ahol f() egy két paraméterű függvény. 
+	    Mivel f() függvény mnincs deklarálva ezért ez a program nem fog lefutni.
+	    printf("%d %d", f(a), a); : a printf() függvény kiírja f(a) és a értékeket egymás mellé, ahoz az f() egy egy paraméterű
+	    függvény. 
+	    printf("%d %d", f(&a), a); : a printf() függvény kiírja f(&a) és a értékeket ahol az f() egy egy paraméterű függvény, &a
+	    pedig az a változó címe.
+	    Az utolsó 3 sor kód magában nem fog lefutni, mert sem az f() függvény sem a változó nincs deklarálva.
         </para>
 
     </section>                     
@@ -397,10 +440,11 @@ $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
             </listitem>
             <listitem>
                 <programlisting><![CDATA[int (*v (int c)) (int a, int b)]]></programlisting>            
-            </listitem>            
+            </listitem>  
             <listitem>
                 <programlisting><![CDATA[int (*(*z) (int)) (int, int);]]></programlisting>            
-            </listitem>            
+            </listitem>  
+		
         </itemizedlist>       
 
 
@@ -409,10 +453,21 @@ $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
         </para>
         <para>
             Megoldás forrása:  
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
+        </para>	
+	<para>
+		int a; : Ez egy egész szám típusú változó.
+		int *b = &a; : Ez egy a egész számra mutató mutató. Értéke a referenciája.
+		int &r = a; : Ez egy egész szám referenciája. Értéke a.
+		int c[5]; : Ez egy 5 elemű egészek tömbje.
+		int (&tr)[5] = c; : Ez egy 5 elemű egészek tömbjének a referenciája.
+		int *d[5]; : Ez egy egészre mutató mutatók tömbje.
+		int *h (); : Ez egy egészre mutató mutatót visszaadó függvény
+		int *(*l) (); : Ez egy egészre mutató mutatót visszaadó függvényre mutató mutató
+		int (*v (int c)) (int a, int b) : Ez egy egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó,
+		egészet kapó függvény
+		int (*(*z) (int)) (int, int); : Ez egy függvénymutató egy egészet visszaadó és két egészet kapó függvényre mutató mutatót 
+		visszaadó, egészet kapó függvényre
+	</para>
     </section>                     
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
