@@ -456,7 +456,7 @@ $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
         </para>	
 	<para>
 		 <![CDATA[
-		#include <stdio.h>
+		#include <iostream>
 		int main()
 		{
 			int a; //Ez egy egész szám típusú változó.
