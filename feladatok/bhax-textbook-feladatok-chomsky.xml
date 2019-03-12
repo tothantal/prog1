@@ -455,18 +455,22 @@ $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
             Megoldás forrása:  
         </para>	
 	<para>
-		int a; : Ez egy egész szám típusú változó.
-		int *b = &a; : Ez egy a egész számra mutató mutató. Értéke a referenciája.
-		int &r = a; : Ez egy egész szám referenciája. Értéke a.
-		int c[5]; : Ez egy 5 elemű egészek tömbje.
-		int (&tr)[5] = c; : Ez egy 5 elemű egészek tömbjének a referenciája.
-		int *d[5]; : Ez egy egészre mutató mutatók tömbje.
-		int *h (); : Ez egy egészre mutató mutatót visszaadó függvény
-		int *(*l) (); : Ez egy egészre mutató mutatót visszaadó függvényre mutató mutató
-		int (*v (int c)) (int a, int b) : Ez egy egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó,
-		egészet kapó függvény
-		int (*(*z) (int)) (int, int); : Ez egy függvénymutató egy egészet visszaadó és két egészet kapó függvényre mutató mutatót 
-		visszaadó, egészet kapó függvényre
+		 <![CDATA[
+		#include <stdio.h>
+		int main()
+		{
+			int a; //Ez egy egész szám típusú változó.
+			int *b = &a;  //Ez egy a egész számra mutató mutató. Értéke a referenciája.
+			int &r = a;  //Ez egy egész szám referenciája. Értéke a.
+			int c[5];  //Ez egy 5 elemű egészek tömbje.
+			int (&tr)[5] = c;  //Ez egy 5 elemű egészek tömbjének a referenciája.
+			int *d[5];  //Ez egy egészre mutató mutatók tömbje.
+			int *h ();  //Ez egy egészre mutató mutatót visszaadó függvény
+			int *(*l) ();  //Ez egy egészre mutató mutatót visszaadó függvényre mutató mutató
+			int (*v (int c)) (int a, int b);  //Ez egy egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó, egészet kapó függvény
+			int (*(*z) (int)) (int, int);  //Ez egy függvénymutató egy egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó, egészet kapó függvényre
+		}
+		]]>
 	</para>
     </section>                     
 
