@@ -108,6 +108,9 @@
         }
           ]]>
         </programlisting>
+	 <para>
+            A fenti program megszámolja az input stringben lévő valós számokat.
+        </para>
     </section>                     
 
     <section>
