@@ -78,7 +78,12 @@
 		#define kulcsszóval történik. Példaként a #define MAX_KULCS 100 egy MAX_KULCS nevű konstans változót deklarál,
 		amelynek az értéke 100. C-ben a konstansokat hagyományosan csupa nagybetűkkel jelőljük.
 		A main függvényen belüli strlen() és strncpy() függvények a string.h fájlban vannak definiálva. A strlen() a paraméterül
-		kapott string hosszát adja vissza eredményül, a strncpy pedig 
+		kapott string hosszát adja vissza eredményül, a strncpy( char* dest, char* src) pedig a dest karakterláncba 
+		másolja át src tartalmát. Ebben az esetben a futtatáskori első argumentumot másolja bele a kulcs tömbbe.
+		Az ezt követő while-ban a read() függvény BUFFER_MERET méretű bájtot olvas bufferbe. Majd amíg az nem nulla, elindít
+		egy for ciklust, ahol amíg i kissebb mint az olvasott bájtok száma, addig buffer i-edik elemét összeéseli a kulcs
+		tömb kulcs_index-edik elemével. Ezután az olvasott bájtokból kiír buffer mennyiségű bájtot.
+		
 	</para>
     </section>        
     <section>
