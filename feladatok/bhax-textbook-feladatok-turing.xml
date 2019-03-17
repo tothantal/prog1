@@ -95,7 +95,7 @@
     <section>
         <title>Lefagyott, nem fagyott, akkor most mi van?</title>
         <para>
-            Mutasd meg, hogy nem lehet olyan programot Ă­rni, amely bĂĄrmely mĂĄs programrĂłl eldĂśnti, hogy le fog-e fagyni vagy sem!
+            Mutasd meg, hogy nem lehet olyan programot Írni, amely bármely más programról eldönti, hogy le fog-e fagyni vagy sem!
         </para>
         <para>
             Megoldáás videó:
@@ -174,7 +174,15 @@ false]]></screen>
             függvényt, azaz a T100 program nem is létezik.                
         </para>
         <para>
-            
+          	A megoldási probléma lényege hogy nem tudunk olyan programot írni, amely eldönti egy másik programról,
+		hogy az lefagy-e vagy sem. Ahhoz hogy a T100 eldöntse, hogy egy program lefagy-e vagy sem,
+		elősször le kell futtatnia azt és megvizsgálni a következményeket. Ha a prgoram lefutott, a T100 kiírja hogy
+		a programunk lefutott, de ha a program lefagy, akkor a T100 is le fog fagyni, mert a döntés előtt
+		le kell futtatnia azt. 
+		
+		Ha a fenti T1000 programot önmagára futtatjuk, akkor két eshetőség adódik: Ha a programunk 
+		nem fagy le, akkor bekövetkezik a végtelen ciklus a T1000-ben és így lefagy. Ha pedig lefagy a programunk, akkor
+		mivel a program lefagy ezért a T1000 is lefagy.
         </para>
     </section>        
                 
@@ -185,10 +193,7 @@ false]]></screen>
             nasználata nélkül!
         </para>
         <para>
-            MegoldĂĄs videĂł: <link xlink:href="https://bhaxor.blog.hu/2018/08/28/10_begin_goto_20_avagy_elindulunk">https://bhaxor.blog.hu/2018/08/28/10_begin_goto_20_avagy_elindulunk</link>
-        </para>
-        <para>
-            MegoldĂĄs forrĂĄsa:  
+            Megoldás videó: <link xlink:href="https://bhaxor.blog.hu/2018/08/28/10_begin_goto_20_avagy_elindulunk">https://bhaxor.blog.hu/2018/08/28/10_begin_goto_20_avagy_elindulunk</link>
         </para>
         <programlisting language="c" >
         <![CDATA[
@@ -201,9 +206,9 @@ false]]></screen>
             printf("a = %d\n", a);
             printf("b = %d\n", b);
 
-            a = a - b;
-            b = a + b;
-            a = b - a;
+            a = a - b;  a = 10 - 4 / 6
+            b = a + b;  b = 6 + 4 / 10
+            a = b - a;  a = 10 - 6 / 4
 
             printf("a = %d\n", a);
             printf("b = %d\n", b);
@@ -212,7 +217,13 @@ false]]></screen>
         </programlisting>
         <para>
             A fenti C program kiírja két változó értékét, felcseréli őket, majd kiírja a változók
-            új értékeit. Az int a = 10 és int b = 4 megadják a és b értékeit. A printf() függvény
+            új értékeit. Az int a = 10 és int b = 4 megadják a és b értékeit. 
+	
+	    Először a-t egyenlővé tesszük a - b -vel (itt így a = 10 - 4 = 6). Majd b-t egyenlővé tesszük a + b -vel, 
+	    de mivel a = a - b, ezért b = a + b = a - b + b = a (b = 10 - 4 + 4 = 10). Ekkor a-t egyenlővé tesszük b - a -val.
+	    Itt b = a és a = a - b -ként van definiálva, tehát a = b - a = a - (a - b) = a - a + b = b ( a = 6 + 4 - (10 - 4) = 4)
+		
+	    A printf() függvény
             kiírja a paraméteréül kapott stringet. Például a fent látható printf("a = %d\n", a)
             azt fogja kiírni hogy a = 10, majd egy új sort kezd. Ebből "a = %d\n" a string rész, amiben a
             %d egy format specifier. Feladata, hogy megmondja, a %d helyére
@@ -227,14 +238,14 @@ false]]></screen>
     </section>                     
 
     <section>
-        <title>LabdapattogĂĄs</title>
+        <title>Labdapattogás</title>
         <para>
             Először if-ekkel, majd bármiféle logikai utasítás vagy kifejezés
             használata nélkül írj egy olyan programot, ami egy labdát pattogtat a karakteres konzolon! (Hogy mit értek
             pattogtatás alatt, alább láthatod a videókon.)
         </para>
         <para>
-            MegoldĂĄs videĂł: <link xlink:href="https://bhaxor.blog.hu/2018/08/28/labdapattogas">https://bhaxor.blog.hu/2018/08/28/labdapattogas</link>
+            MegoldĂĄs videó: <link xlink:href="https://bhaxor.blog.hu/2018/08/28/labdapattogas">https://bhaxor.blog.hu/2018/08/28/labdapattogas</link>
         </para>
         <para>
             Labdapattogtatás if nélkül: 
@@ -304,14 +315,14 @@ false]]></screen>
     <section>
         <title>Szóhossz és a Linus Torvalds féle BogoMIPS</title>
         <para>
-            Írj egy programot, ami megnĂŠzi, hogy hĂĄny bites a szĂł a gĂŠpeden, azaz mekkora az <type>int</type> mĂŠrete.
-            HasznĂĄld ugyanazt a while ciklus fejet, amit Linus Torvalds a BogoMIPS rutinjĂĄban! 
+            Írj egy programot, ami megnézi, hogy hány bites a szó a gépeden, azaz mekkora az <type>int</type> mérete.
+            Használd ugyanazt a while ciklus fejet, amit Linus Torvalds a BogoMIPS rutinjában! 
         </para>
         <para>
-            MegoldĂĄs videĂł: <link xlink:href=""></link>
+            Megoldás videó: <link xlink:href=""></link>
         </para>
         <para>
-            MegoldĂĄs forrĂĄsa: <link xlink:href=""></link>
+            Megoldás forrása: <link xlink:href=""></link>
         </para>
         <para>
 		<![CDATA[
@@ -388,46 +399,46 @@ main (void)
     <section>
         <title>HellĂł, Google!</title>
         <para>
-            Ărj olyan C programot, amely egy 4 honlapbĂłl ĂĄllĂł hĂĄlĂłzatra kiszĂĄmolja a nĂŠgy lap Page-Rank 
-            ĂŠrtĂŠkĂŠt!
+            Írj olyan C programot, amely egy 4 honlapból álló hálózatra kiszámolja a négy lap Page-Rank 
+            értékét!
         </para>
         <para>
-            MegoldĂĄs videĂł: <link xlink:href=""></link>
+            Megoldás videó: <link xlink:href=""></link>
         </para>
         <para>
-            MegoldĂĄs forrĂĄsa: <link xlink:href=""></link>
+            Megoldás forrása: <link xlink:href=""></link>
         </para>
         <para>
-            TanulsĂĄgok, tapasztalatok, magyarĂĄzat...
+            Tanulságok, tapasztalatok, magyarázat...
         </para>
     </section>
 
     <section xml:id="Brun">
-        <title>100 ĂŠves a Brun tĂŠtel</title>
+        <title>100 éves a Brun tétel</title>
         <para>
-            Ărj R szimulĂĄciĂłt a Brun tĂŠtel demonstrĂĄlĂĄsĂĄra!
+            Írj R szimulációt a Brun tétel demonstrálására!
         </para>
         <para>
-            MegoldĂĄs videĂł: <link xlink:href="https://youtu.be/xbYhp9G6VqQ">https://youtu.be/xbYhp9G6VqQ</link>
+            Megoldás videó: <link xlink:href="https://youtu.be/xbYhp9G6VqQ">https://youtu.be/xbYhp9G6VqQ</link>
         </para>
         <para>
-            MegoldĂĄs forrĂĄsa: <link xlink:href="https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/Primek_R">https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/Primek_R</link>
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/Primek_R">https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/Primek_R</link>
         </para>
     </section>
     
     <section xml:id="bhax-textbook-feladatok-turing.MontyHall">
-        <title>A Monty Hall problĂŠma</title>
+        <title>A Monty Hall probléma</title>
         <para>
-            Ărj R szimulĂĄciĂłt a Monty Hall problĂŠmĂĄra!
+            Írj R szimulációt a Monty Hall problémára!
         </para>
         <para>
-            MegoldĂĄs videĂł: <link xlink:href="https://bhaxor.blog.hu/2019/01/03/erdos_pal_mit_keresett_a_nagykonyvben_a_monty_hall-paradoxon_kapcsan">https://bhaxor.blog.hu/2019/01/03/erdos_pal_mit_keresett_a_nagykonyvben_a_monty_hall-paradoxon_kapcsan</link>
+            Megoldás videó: <link xlink:href="https://bhaxor.blog.hu/2019/01/03/erdos_pal_mit_keresett_a_nagykonyvben_a_monty_hall-paradoxon_kapcsan">https://bhaxor.blog.hu/2019/01/03/erdos_pal_mit_keresett_a_nagykonyvben_a_monty_hall-paradoxon_kapcsan</link>
         </para>
         <para>
-            MegoldĂĄs forrĂĄsa: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R</link>
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R</link>
         </para>
         <para>
-            TanulsĂĄgok, tapasztalatok, magyarĂĄzat...
+            Tanulságok, tapasztalatok, magyarázat...
         </para>
     </section>
 
