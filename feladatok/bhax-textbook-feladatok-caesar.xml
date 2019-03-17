@@ -13,11 +13,66 @@
         <para>
             Megoldás videó:
         </para>
+	<programlisting language="c">
+		<![CDATA[
+#include <stdio.h>
+#include <stdlib.h>
+
+int
+main ()
+{
+    int nr = 5;
+    double **tm;
+
+    if ((tm = (double **) malloc (nr * sizeof (double *))) == NULL)
+    {
+        return -1;
+    }
+
+    for (int i = 0; i < nr; ++i)
+    {
+        if ((tm[i] = (double *) malloc ((i + 1) * sizeof (double))) == NULL)
+        {
+            return -1;
+        }
+
+    }
+
+    for (int i = 0; i < nr; ++i)
+        for (int j = 0; j < i + 1; ++j)
+            tm[i][j] = i * (i + 1) / 2 + j;
+
+    for (int i = 0; i < nr; ++i)
+    {
+        for (int j = 0; j < i + 1; ++j)
+            printf ("%f, ", tm[i][j]);
+        printf ("\n");
+    }
+
+    tm[3][0] = 42.0;
+    (*(tm + 3))[1] = 43.0;	// mi van, ha itt hiányzik a külső ()
+    *(tm[3] + 2) = 44.0;
+    *(*(tm + 3) + 3) = 45.0;
+
+    for (int i = 0; i < nr; ++i)
+    {
+        for (int j = 0; j < i + 1; ++j)
+            printf ("%f, ", tm[i][j]);
+        printf ("\n");
+    }
+
+    for (int i = 0; i < nr; ++i)
+        free (tm[i]);
+
+    free (tm);
+
+    return 0;
+	}]]>
+	</programlisting>
+
         <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
+            Ez a program a malloc() és a free() függvényeket felhasználva helyet foglal
+            egy alsó háromszög mátrixnak a szabad tárban.
         </para>            
     </section>        
     <section>
@@ -30,9 +85,6 @@
         </para>
         <para>
             Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
         </para>
         <programlisting language = "c">
         <![CDATA[ 
@@ -77,19 +129,12 @@
 		titkosított fájl, aminek az eredetijét visszakaphatjuk, ha az eredményt ismét össze XOR-ozzuk a kulccsal.
 		A XOR jelentése kizáró vagy, elvégezni az ^ operátorral lehet. A XOR B eredménye csak akkor igaz, ha vagy csak 
 		A, vagy csak B igaz. Minden más esetben hamis.
-	</para>
-	<para>
-		A #define MAX_KULCS 100 egy MAX_KULCS nevű konstans változót deklarál, amelynek az értéke 100. 
-		C-ben a konstansokat hagyományosan csupa nagybetűkkel jelőljük.
+		Tehát:
 		
-		A main függvényen belüli strlen() és strncpy() függvények a string.h fájlban vannak definiálva. A strlen() a paraméterül
-		kapott string hosszát adja vissza eredményül, a strncpy( char* dest, char* src) pedig a dest karakterláncba 
-		másolja át src tartalmát. Ebben az esetben a futtatáskori első parancssori argumentumot másolja bele a kulcs tömbbe.
-		
-		Az ezt követő while-ban a read() függvény BUFFER_MERET méretű bájtot olvas bufferbe. Majd amíg az nem nulla, elindít
-		egy for ciklust, ahol amíg i kissebb mint az olvasott bájtok száma, addig buffer i-edik elemét összeéseli a kulcs
-		tömb kulcs_index-edik elemével. Ezután az olvasott bájtokból kiír buffer mennyiségű bájtot. a read() és a 
-		write() függvények esetében a 0 az stdin (standard input), az 1 pedig az stdout, azaz standard outputot jelent.
+		1 ^ 1 = 0
+		0 ^ 1 = 1
+		1 ^ 0 = 1
+		0 ^ 0 = 0
 	</para>
     </section>        
     <section>
