@@ -6,7 +6,7 @@
         </keywordset>
     </info>
     <section>
-        <title><type>int ***</type> háromszögmátrix</title>
+        <title><type>int **</type> háromszögmátrix</title>
         <para>
            
         </para>
@@ -71,8 +71,17 @@ main ()
 	</programlisting>
 
         <para>
-            Ez a program a malloc() és a free() függvényeket felhasználva helyet foglal
-            egy alsó háromszög mátrixnak a szabad tárban.
+  		Ez a program a malloc() és a free() függvényeket felhasználva helyet foglal
+		egy alsó háromszög mátrixnak a szabad tárban, majd szabaddá teszi azt a helyet.
+		
+		A malloc() függvény feladata a megadott számú bájtoknak való memóriablokk lefoglalása. 
+		Visszatérítési értéke egy void típusú pointer. Ebben a programban két malloc() függvény van, mindkettő egy egy 
+		if függvényben. Ez azért van, hogyha az allokáció sikertelen, tehát nullpointer a visszatérési értéke,
+		akkor a program befejeződjön.
+		
+		A malloc() által foglalt memóriaterület magától nem fog felszabadulni, ezért ezt a program
+		végén nekünk kell megtenni a free() függvénnyel.
+		
         </para>            
     </section>        
     <section>
@@ -87,6 +96,7 @@ main ()
             Megoldás forrása:                
         </para>
         <programlisting language = "c">
+		
         <![CDATA[ 
         #include <stdio.h>
         #include <unistd.h>
@@ -129,6 +139,7 @@ main ()
 		titkosított fájl, aminek az eredetijét visszakaphatjuk, ha az eredményt ismét össze XOR-ozzuk a kulccsal.
 		A XOR jelentése kizáró vagy, elvégezni az ^ operátorral lehet. A XOR B eredménye csak akkor igaz, ha vagy csak 
 		A, vagy csak B igaz. Minden más esetben hamis.
+		
 		Tehát:
 		
 		1 ^ 1 = 0
@@ -145,11 +156,55 @@ main ()
         <para>
             Megoldás videó:
         </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
+        <programlisting language = "java">
+<![CDATA[
+public class ExorTitkosító {
+    
+    public ExorTitkosító(String kulcsSzöveg,
+            java.io.InputStream bejövőCsatorna,
+            java.io.OutputStream kimenőCsatorna)
+            throws java.io.IOException {
+        
+        byte [] kulcs = kulcsSzöveg.getBytes();
+        byte [] buffer = new byte[256];
+        int kulcsIndex = 0;
+        int olvasottBájtok = 0;
+
+        while((olvasottBájtok =
+                bejövőCsatorna.read(buffer)) != -1) {
+            
+            for(int i=0; i<olvasottBájtok; ++i) {
+                
+                buffer[i] = (byte)(buffer[i] ^ kulcs[kulcsIndex]);
+                kulcsIndex = (kulcsIndex+1) % kulcs.length;
+                
+            }
+            
+            kimenőCsatorna.write(buffer, 0, olvasottBájtok);
+            
+        }
+        
+    }
+    
+    public static void main(String[] args) {
+        
+        try {
+            
+            new ExorTitkosító(args[0], System.in, System.out);
+            
+        } catch(java.io.IOException e) {
+            
+            e.printStackTrace();
+            
+        }
+        
+    }
+    
+}
+]]>
+        </programlisting>
+	<para>
+            Ez az előző feladatnak a Java nyelven megvalósított változata.
         </para>            
     </section>        
     <section>
@@ -164,7 +219,7 @@ main ()
             Megoldás forrása:                
         </para>
         <para>
-            Tanulságok, tapasztalatok, magyarázat...
+            A következő program megtöri a titkosított fájlunkat.
         </para>        
         
          <programlisting language = "c">
