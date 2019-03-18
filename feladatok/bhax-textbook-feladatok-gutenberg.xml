@@ -23,8 +23,51 @@
         </para>
         <para>
             Megoldás videó: <link xlink:href="https://youtu.be/zmfT9miB-jY">https://youtu.be/zmfT9miB-jY</link>
-        </para>        
-    </section>        
+        </para>
+        <para>
+            The C Programming Language, Brian W. Kernighan, Dennis M. Ritchie
+            
+            1.1 Indulás.
+            
+            A könyv írói szerint minden program elsajátítása a "Helló Világ!" program megírásával történik. 
+            Ez C nyelven így néz ki:
+         </para>
+            <programlisting language = "c">
+
+            <![CDATA[
+            
+include <stdio.h>
+
+int main()
+{
+    printf("Hello World!"\n);
+}
+            
+            ]]>
+             </programlisting>
+        <para>
+            Ezt a forráskódot programnev.c néven kell elmenteni, futtatása operációs rendszertől függ.
+            Lefordítása a "gcc programnev.c -nev" paranccsal történik, futtatása
+            Linuxon "./nev" , Windows alatt "nev" a terminálból. A program eredménye a következőképpen fog kinézni:
+            
+            Hello World!
+        </para>
+        <para>
+            Egy C program függvényekből (function) és változókból (variable) áll. 
+            Egy függvény pedig állításokból (statement). Az állítások megmondják, hogy mit kell csinálni, a változók pedig
+            a számításokhoz szükkséges értékeket tárolják.
+            
+            A munkánkat különböző könyvtárak segíthetik, amelyeket inkludálni kell. Ezt itt az első sor teszi.
+            Az "include <stdio.h>" azt mondja a compilernek, hogy az stdio.h (standard input/output) fájl tartalmát
+            másolja át a mi programfájlunkba.
+            
+        </para>
+        <para>
+            Az argumentumok azok az értékek, amelyeket függvényhíváskor adunk meg. Például a "printf("Helló Világ!\n")"
+            esetén az printf() függvény argumentuma a "Helló Világ!\n" karakterlánc. Az argumentumokat mindig egy zárójelbe tesszük.
+        </para>
+            
+        </section>        
     <section>
         <title>Programozás</title>
         <para>                
