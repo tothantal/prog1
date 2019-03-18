@@ -324,7 +324,7 @@ false]]></screen>
         <para>
             Megoldás forrása: <link xlink:href=""></link>
         </para>
-        <para>
+        <programlisting language = "c">
 		<![CDATA[
             // BHAX BogoMIPS
 // Copyright (C) 2019
@@ -393,11 +393,12 @@ main (void)
 }
 
 		]]>
-        </para>
+        </programlisting>
+	    
     </section>                     
 
     <section>
-        <title>HellĂł, Google!</title>
+        <title>Helló, Google!</title>
         <para>
             Írj olyan C programot, amely egy 4 honlapból álló hálózatra kiszámolja a négy lap Page-Rank 
             értékét!
@@ -405,11 +406,80 @@ main (void)
         <para>
             Megoldás videó: <link xlink:href=""></link>
         </para>
+        <programlisting language = "c">
+		<![CDATA[
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+void kiir (double tomb[], int db);
+double tavolsag(double pagerank[], double pagerank_temp[], int db);
+
+int main(void)
+{
+	double L[4][4] =
+  	{
+		{0.0, 0.0, 1.0 / 3.0, 0.0},
+		{1.0, 1.0 / 2.0, 1.0 / 3.0, 1.0},
+		{0.0, 1.0 / 2.0, 0.0, 0.0},
+		{0.0, 0.0, 1.0 / 3.0, 0.0}
+	};
+
+	double PR[4] = {0.0, 0.0, 0.0, 0.0};
+	double PRv[4] = {1.0 / 4.0, 1.0 / 4.0, 1.0 / 4.0, 1.0 / 4.0};
+
+	for (;;)
+	{
+		for(int i=0; i<4; i++)
+    		{
+			PR[i] = PRv[i];
+		}
+
+		for (int i=0; i<4; i++)
+    		{
+			double temp = 0.0;
+
+			for (int j=0; j<4; j++)
+      			{
+				temp += L[i][j] * PR[j];
+				PRv[i] = temp;
+			}
+		}
+
+		if(tavolsag(PR, PRv, 4) < 0.000001)
+    		{
+			break;
+		}
+
+	kiir(PR, 4);
+
+	return 0;
+}
+
+void kiir (double tomb[], int db)
+{
+	for (int i=0; i<db; i++)
+	{
+		printf("PageRank [%d]: %lf\n", i, tomb[i]);
+	}
+}
+
+double tavolsag(double pagerank[], double pagerank_temp[], int db)
+{
+	double dist = 0.0;
+
+	for(int i=0; i<db; i++)
+	{
+		dist += (pagerank[i] - pagerank_temp[i]) * (pagerank[i] - pagerank_temp[i]);
+	}
+
+	return sqrt(dist);
+}
+]]>
+        </programlisting>
         <para>
-            Megoldás forrása: <link xlink:href=""></link>
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
+            Ez a program egy 4 honlapból álló hálózatra kiszámolja a négy lap Page-Rank 
+            értékét.
         </para>
     </section>
 
@@ -424,6 +494,58 @@ main (void)
         <para>
             Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/Primek_R">https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/Primek_R</link>
         </para>
+	<programlisting language = "R">
+<![CDATA[
+
+#   Copyright (C) 2019  Dr. Norbert Bátfai, nbatfai@gmail.com
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+library(matlab)
+
+stp <- function(x){
+
+    primes = primes(x)
+    diff = primes[2:length(primes)]-primes[1:length(primes)-1]
+    idx = which(diff==2)
+    t1primes = primes[idx]
+    t2primes = primes[idx]+2
+    rt1plust2 = 1/t1primes+1/t2primes
+    return(sum(rt1plust2))
+}
+
+x=seq(13, 1000000, by=10000)
+y=sapply(x, FUN = stp)
+plot(x,y,type="b")
+       
+]]>
+	</programlisting>
+	<para>
+	A Brun tétel szerint az ikerprímek reciprokösszege egy Brun-konstans nevű értékhez konvergál.
+		
+	Az ikerprímek olyan prímpárok, melyek különbsége 2. Egy prímpár pedig egy olyan prím, ami egy másik
+	prímtől 2-nél nagyobb, vagy kisebb. Példaképp az 1 és a 3 számok.
+	Ekkor 1/1 + 1/3 = 1.333 . A Brun-konstans megközelítő értéke 1,90216 .
+		
+	Itt a program első felében a primes(x) függvényt definiáljuk, ami egyrészt kiírja x-ig a prímszámokat, másrészt
+	kiszámolja az ikerprímek reciprokösszegeit. Azután a második részben kiplottolhatjuk a függvény által
+	kiszámolt eredményeket.
+	
+	Viggo Brun, norvég matematikus bizonyította be a tételt 1919-ben.
+		
+	
+	</para>
     </section>
     
     <section xml:id="bhax-textbook-feladatok-turing.MontyHall">
@@ -437,9 +559,80 @@ main (void)
         <para>
             Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R</link>
         </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
+        <programlisting language = "R">
+<![CDATA[
+
+#   An illustration written in R for the Monty Hall Problem 
+#   Copyright (C) 2019  Dr. Norbert Bátfai, nbatfai@gmail.com
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>
+#
+#   https://bhaxor.blog.hu/2019/01/03/erdos_pal_mit_keresett_a_nagykonyvben_a_monty_hall-paradoxon_kapcsan
+# 
+
+kiserletek_szama=10000000
+kiserlet = sample(1:3, kiserletek_szama, replace=T)
+jatekos = sample(1:3, kiserletek_szama, replace=T)
+musorvezeto=vector(length = kiserletek_szama)
+
+for (i in 1:kiserletek_szama) {
+
+    if(kiserlet[i]==jatekos[i]){
+    
+        mibol=setdiff(c(1,2,3), kiserlet[i])
+    
+    }else{
+    
+        mibol=setdiff(c(1,2,3), c(kiserlet[i], jatekos[i]))
+    
+    }
+
+    musorvezeto[i] = mibol[sample(1:length(mibol),1)]
+
+}
+
+nemvaltoztatesnyer= which(kiserlet==jatekos)
+valtoztat=vector(length = kiserletek_szama)
+
+for (i in 1:kiserletek_szama) {
+
+    holvalt = setdiff(c(1,2,3), c(musorvezeto[i], jatekos[i]))
+    valtoztat[i] = holvalt[sample(1:length(holvalt),1)]
+    
+}
+
+valtoztatesnyer = which(kiserlet==valtoztat)
+
+
+sprintf("Kiserletek szama: %i", kiserletek_szama)
+length(nemvaltoztatesnyer)
+length(valtoztatesnyer)
+length(nemvaltoztatesnyer)/length(valtoztatesnyer)
+length(nemvaltoztatesnyer)+length(valtoztatesnyer)
+
+
+]]>
+        </programlisting>
+	<para>
+		A Monty Hall probléma keretében arról van szó, hogy adott három lehetőség (doboz, ajtó stb.), 
+		ebből egy nyerő és kettő nem. Nekünk a feladatunk hogy ezekből válasszunk egyet. 
+		Ilyenkor az esély hogy a nyerő dobozt választjuk egy a háromból. Választásunk után egy második fél kinyit a
+		maradék két dobozból egy olyat, ami biztosan nem nyerő, majd felteszi nekünk a kérdést, hogy maradunk-e az
+		előző döntésünknél, vagy változtatunk rajta. Ekkor a helyes válasz az, hogy változtassunk, ugyanis így 
+		2/3 esélyünk van ara, hogy jó dobozt választunk szemben az előző 1/3-al.
+	
+	</para>
     </section>
 
 </chapter>                
