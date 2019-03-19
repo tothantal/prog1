@@ -10,15 +10,41 @@
         <para>
             Állapotátmenet gráfjával megadva írd meg ezt a gépet!
         </para>
+        <programlisting = "c">
+<![CDATA[
+
+#include <stdio.h>
+
+int main()
+{
+	int szam;
+	scanf("%d",&szam);
+	for(int i = 0; i < szam; ++i)
+	{
+		printf("|");
+	}
+	printf("\n");
+	return 0;
+}
+
+]]>
+	</programlisting>
         <para>
-            Megoldás videó:
+        	Ez a program tizes számrendszerű számokat vált egyes számrendszerbe.
         </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
+	<para>
+		Deklarálunk egy integert, amit beszkennelünk a scanf("",&input) függvény segítségével. A scanf() hasonlóan a printf()
+		függvényhez két, vagy több argumentummal használandó, ahol az első egy karakterlánc, a többi pedig a stringben található 
+		"%" + betű kombinációjú jelek helyettesítési értéke.
+	</para>
+	<para>
+		A program következő részében egy for ciklus található, ahol egy i integert léptetünk nullától addig,
+		amíg el nem éri a szam változó értékét. Minden egyes léptetés után kiírunk egy "|" jelet. Ezzel elérjük, hogy lényegében
+		átváltunk tizes számrendszerből egyes vagy unáris számrendszerbe.
+	</para>
+	<para>
+		A program állapotgráfja:
+	</para>
     </section>        
         
     <section>
@@ -26,15 +52,8 @@
         <para>
             Mutass be legalább két környezetfüggő generatív grammatikát, amely ezt a nyelvet generálja!
         </para>
-        <para>
-            Megoldás videó:
-        </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
+	<para>
+	</para>
     </section>        
                 
     <section>
@@ -79,15 +98,6 @@
             Nem elfogadható olyan megoldás, amely maga olvassa betűnként a bemenetet, 
             a feladat lényege, hogy lexert használjunk, azaz óriások vállán álljunk és ne kispályázzunk!
         </para>
-        <para>
-            Megoldás videó: 
-        </para>
-        <para>
-            Megoldás forrása:  
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
         <programlisting language = "c">
           <![CDATA[  
         %{
@@ -117,15 +127,6 @@
         <title>l33t.l</title>
         <para>
             Lexelj össze egy l33t ciphert!
-        </para>
-        <para>
-            Megoldás videó: 
-        </para>
-        <para>
-            Megoldás forrása:  
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
         </para>
         <programlisting language = "c">
           <![CDATA[  
@@ -255,9 +256,15 @@ Norbert Bátfai, batfai.norbert@inf.unideb.hu
 		A program elején egy struktúra van megadva, ami lehetővé teszi a saját típusunk deklarálását.
 		Itt a megadott cipher típushoz tartozik egy c karakter és egy leet karakterre mutató mutatók négyelemű tömbje. 
 		Ezután inicializáljuk a cipher típusú l337d1c7 tömbünket. Ezzel véget ér a definícók része.
+	</para>
+	<para>
 		A program következő részében egy for ciklus található, ami végigmegy a l337d1c7 tömbön és megkeresi a betűt, amit
 		inputba megkapott a program, majd generál egy véletlenszerű számot 1-től 100-ig és az eredménytől függően
 		kiválasztja az adott c karakterhez tartozó leet helyettesítési értéket.
+	</para>
+	<para>
+		Lefordítani a "lex -o l337d1c7.c l337d1c7.l" utasítással kell, ahol l337d1c7.c a forrásfájlunk, l337d1c7.l oedig
+		a lexer által írt programunk. A futtatás a "gcc l337d1c7.c -o l337d1c7 -lfl" paranccsal történik.
 	</para>
     </section>                     
 
@@ -316,14 +323,6 @@ Norbert Bátfai, batfai.norbert@inf.unideb.hu
             </listitem>
         </orderedlist>
         <para>
-            Megoldás forrása:  
-        </para>
-
-        <para>
-            Megoldás videó: 
-        </para>
-
-        <para>
             for(i=0; i<5; ++i): Legyen i egyenlő 0, ha i kisebb 5-nél akkor inkrementálja egyel, majd nézze meg i értékét újra.
 	    Mivel itt i nincs deklarálva, ezért ez a program nem fog lefutni.
 	    for(i=0; i<5; i++): Legyen i egyenlő 0, ha i kisebb 5-nél akkor nézze meg i értékét újra, majd inkrementálja egyel.
@@ -358,17 +357,9 @@ $(\forall x \exists y ((x<y)\wedge(y \text{ prím})\wedge(SSy \text{ prím})))$
 $(\exists y \forall x (x \text{ prím}) \supset (x<y)) $ 
 
 $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
-]]></programlisting>        
+]]></programlisting>
         <para>
-            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/MatLog_LaTeX">https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/MatLog_LaTeX</link>
-        </para>
-
-        <para>
-            Megoldás videó: <link xlink:href="https://youtu.be/ZexiPy3ZxsA">https://youtu.be/ZexiPy3ZxsA</link>, <link xlink:href="https://youtu.be/AJSXOQFF_wk">https://youtu.be/AJSXOQFF_wk</link>
-        </para>
-
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
+            
         </para>
     </section>                                                                                                                                                                            
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
