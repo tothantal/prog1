@@ -33,7 +33,7 @@ int main()
         	Ez a program tizes számrendszerű számokat vált egyes számrendszerbe.
         </para>
 	<para>
-		Deklarálunk egy integert, amit beszkennelünk a scanf("",&input) függvény segítségével. A scanf() hasonlóan a printf()
+		Deklarálunk egy integert, amit beszkennelünk a <function>scanf(string, &input)</function> függvény segítségével. A scanf() hasonlóan a printf()
 		függvényhez két, vagy több argumentummal használandó, ahol az első egy karakterlánc, a többi pedig a stringben található 
 		"%" + betű kombinációjú jelek helyettesítési értéke.
 	</para>
@@ -62,12 +62,6 @@ int main()
             A <citation>KERNIGHANRITCHIE</citation> könyv C referencia-kézikönyv/Utasítások melléklete alapján definiáld 
             BNF-ben a C utasítás fogalmát!
             Majd mutass be olyan kódcsipeteket, amelyek adott szabvánnyal nem fordulnak (például C89), mással (például C99) igen.
-        </para>
-        <para>
-            Megoldás videó: 
-        </para>
-        <para>
-            Megoldás forrása:  
         </para>
         <para>
 		<![CDATA[
