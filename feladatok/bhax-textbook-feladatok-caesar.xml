@@ -141,7 +141,8 @@ main ()
 		A, vagy csak B igaz. Minden más esetben hamis.
 		
 		Tehát:
-		
+	</para>
+	<para>
 		1 ^ 1 = 0
 		0 ^ 1 = 1
 		1 ^ 0 = 1
