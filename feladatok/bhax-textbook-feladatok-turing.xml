@@ -8,7 +8,7 @@
     <section>
         <title>Végtelen ciklus</title>
         <para>
-            Írj olyan C végtelen ciklusokat, amelyek 0 illetve 100 százalĂŠkban dolgoztatnak egy magot és egy olyat, amely  
+            Írj olyan C végtelen ciklusokat, amelyek 0 illetve 100 százalékban dolgoztatnak egy magot és egy olyat, amely  
             100 százalékban minden magot!
         </para>
         <para>
@@ -189,7 +189,7 @@ false]]></screen>
     <section>
         <title>Változók értékének felcserélése</title>
         <para>
-            Írj olyan C programot, amely felcseréli két változĂł értékét, bármifĂŠle logikai utasítás vagy kifejezés
+            Írj olyan C programot, amely felcseréli két változó értékét, bármiféle logikai utasítás vagy kifejezés
             nasználata nélkül!
         </para>
         <para>
@@ -218,11 +218,13 @@ false]]></screen>
         <para>
             A fenti C program kiírja két változó értékét, felcseréli őket, majd kiírja a változók
             új értékeit. Az int a = 10 és int b = 4 megadják a és b értékeit. 
-	
+	</para>
+	<para>
 	    Először a-t egyenlővé tesszük a - b -vel (itt így a = 10 - 4 = 6). Majd b-t egyenlővé tesszük a + b -vel, 
 	    de mivel a = a - b, ezért b = a + b = a - b + b = a (b = 10 - 4 + 4 = 10). Ekkor a-t egyenlővé tesszük b - a -val.
 	    Itt b = a és a = a - b -ként van definiálva, tehát a = b - a = a - (a - b) = a - a + b = b ( a = 6 + 4 - (10 - 4) = 4)
-		
+	</para>
+	<para>
 	    A printf() függvény
             kiírja a paraméteréül kapott stringet. Például a fent látható printf("a = %d\n", a)
             azt fogja kiírni hogy a = 10, majd egy új sort kezd. Ebből "a = %d\n" a string rész, amiben a
@@ -245,7 +247,7 @@ false]]></screen>
             pattogtatás alatt, alább láthatod a videókon.)
         </para>
         <para>
-            MegoldĂĄs videó: <link xlink:href="https://bhaxor.blog.hu/2018/08/28/labdapattogas">https://bhaxor.blog.hu/2018/08/28/labdapattogas</link>
+            Megoldá videó: <link xlink:href="https://bhaxor.blog.hu/2018/08/28/labdapattogas">https://bhaxor.blog.hu/2018/08/28/labdapattogas</link>
         </para>
         <para>
             Labdapattogtatás if nélkül: 
@@ -533,15 +535,18 @@ plot(x,y,type="b")
 	</programlisting>
 	<para>
 	A Brun tétel szerint az ikerprímek reciprokösszege egy Brun-konstans nevű értékhez konvergál.
-		
+	</para>
+	<para>
 	Az ikerprímek olyan prímpárok, melyek különbsége 2. Egy prímpár pedig egy olyan prím, ami egy másik
 	prímtől 2-nél nagyobb, vagy kisebb. Példaképp az 1 és a 3 számok.
 	Ekkor 1/1 + 1/3 = 1.333 . A Brun-konstans megközelítő értéke 1,90216 .
-		
+	</para>
+	<para>
 	Itt a program első felében a primes(x) függvényt definiáljuk, ami egyrészt kiírja x-ig a prímszámokat, másrészt
 	kiszámolja az ikerprímek reciprokösszegeit. Azután a második részben kiplottolhatjuk a függvény által
 	kiszámolt eredményeket.
-	
+	</para>
+	<para>
 	Viggo Brun, norvég matematikus bizonyította be a tételt 1919-ben.
 		
 	
@@ -627,11 +632,12 @@ length(nemvaltoztatesnyer)+length(valtoztatesnyer)
 	<para>
 		A Monty Hall probléma keretében arról van szó, hogy adott három lehetőség (doboz, ajtó stb.), 
 		ebből egy nyerő és kettő nem. Nekünk a feladatunk hogy ezekből válasszunk egyet. 
+	</para>
+	<para>
 		Ilyenkor az esély hogy a nyerő dobozt választjuk egy a háromból. Választásunk után egy második fél kinyit a
 		maradék két dobozból egy olyat, ami biztosan nem nyerő, majd felteszi nekünk a kérdést, hogy maradunk-e az
 		előző döntésünknél, vagy változtatunk rajta. Ekkor a helyes válasz az, hogy változtassunk, ugyanis így 
 		2/3 esélyünk van ara, hogy jó dobozt választunk szemben az előző 1/3-al.
-	
 	</para>
     </section>
 
