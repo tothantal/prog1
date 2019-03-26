@@ -396,6 +396,15 @@ main (void)
 
 		]]>
         </programlisting>
+	<para>
+		A bogomips egy relatív mértékegység ami a processzor gyorsaságát jellemzi. A név egy szóösszerántása a "bogus MIPS" 
+		kifejezésnek ami nagyjából annyit tesz, hogy valótlan MIPS (milliónyi utasítás/másodperc). Célja a gépek processzorainak az egymással
+		való összehasonlítása. A program maga azt méri, hogy a processzor mennyi idő alatt végez el egy adott ciklust. 
+	</para>
+	<para>
+		A programot ami a mérést végzi úgy hívják, hogy BogoMips, amit Linus Torvalds, a Linux operációs rendszer készítője
+		írt. 
+	</para>
 	    
     </section>                     
 
