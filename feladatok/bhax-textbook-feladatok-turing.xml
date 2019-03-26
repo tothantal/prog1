@@ -414,9 +414,6 @@ main (void)
             Írj olyan C programot, amely egy 4 honlapból álló hálózatra kiszámolja a négy lap Page-Rank 
             értékét!
         </para>
-        <para>
-            Megoldás videó: <link xlink:href=""></link>
-        </para>
         <programlisting language = "c">
 		<![CDATA[
 #include <stdio.h>
@@ -492,6 +489,14 @@ double tavolsag(double pagerank[], double pagerank_temp[], int db)
             Ez a program egy 4 honlapból álló hálózatra kiszámolja a négy lap Page-Rank 
             értékét.
         </para>
+	<para>
+		A PageRank egy algoritmus, amit a Google használ arra, hogy a keresőjükben talált weboldalakat sorbaállítsa.
+		Lényegében a weboldalak fontosságát méri. Úgy működik, hogy megnézi, egy a weboldalra mutató linkek számát és azok minőségét. 
+		Minél több és jobb minőségű linkek mutatnak egy weboldalra, annál jobb minőségűnek számít. 
+	</para>
+	<para>
+		Larry Page-ről, a Google egyik alapítójáról lett elnevezve az algoritmus.
+	</para>
     </section>
 
     <section xml:id="Brun">
