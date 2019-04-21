@@ -20,7 +20,7 @@
             Tanulságok, tapasztalatok, magyarázat...
         </para>
     </section>        
-
+<!--        
     <section>
         <title>Szoftmax R MNIST</title>
         <para>
@@ -36,7 +36,7 @@
             Tanulságok, tapasztalatok, magyarázat...
         </para>
     </section>        
-
+-->
     <section>
         <title>Mély MNIST</title>
         <para>
@@ -52,7 +52,7 @@
             Tanulságok, tapasztalatok, magyarázat...
         </para>
     </section>        
-
+<!--        
     <section>
         <title>Deep dream</title>
         <para>
@@ -68,7 +68,7 @@
             Tanulságok, tapasztalatok, magyarázat...
         </para>
     </section>        
-                  
+       -->           
     <section>
         <title>Robotpszichológia</title>
         <para>
