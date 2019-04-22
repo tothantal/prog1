@@ -425,7 +425,10 @@ np.argmax(predictions_single[0])
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása:                
+            Megoldás forrása:
+            <link xlink:href="facenet">
+                https://github.com/davidsandberg/facenet
+            </link> 
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
