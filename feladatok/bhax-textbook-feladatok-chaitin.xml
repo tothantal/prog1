@@ -207,7 +207,7 @@
             Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/GIMP_Lisp/Mandala">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/GIMP_Lisp/Mandala</link>               
         </para>
         <programlisting language = "scheme">
-           <!CDATA[
+           <![CDATA[
         ; bhax_mandala9.scm
 ;
 ; BHAX-Mandala creates a mandala from a text box.
