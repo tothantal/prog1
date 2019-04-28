@@ -1,0 +1,510 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Chomsky!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>Decimálisból unárisba átváltó Turing gép</title>
+        <para>
+            Állapotátmenet gráfjával megadva írd meg ezt a gépet!
+        </para>
+        <programlisting language = "c">
+<![CDATA[
+
+#include <stdio.h>
+
+int main()
+{
+	int szam;
+	scanf("%d",&szam);
+	for(szam; szam != 0; --szam)
+	{
+		printf("|");
+	}
+	printf("\n");
+	return 0;
+}
+
+]]>
+	</programlisting>
+        <para>
+        	Ez a program tizes számrendszerű számokat vált egyes számrendszerbe.
+        </para>
+	<para>
+		Deklarálunk egy integert, amit beszkennelünk a <programlisting><![CDATA[scanf(string, &input)]]></programlisting> függvény segítségével. A scanf() hasonlóan a printf()
+		függvényhez két, vagy több argumentummal használandó, ahol az első egy karakterlánc, 
+a többi pedig a stringben található "%" + betű kombinációjú jelek helyettesítési értéke.
+	</para>
+	<para>
+		A program következő részében egy for ciklus található, ahol a bekért szám értékét csökkentjük egyenként nulláig úgy, hogy minden egyes csökkentés után kiírunk egy "|" jelet. Ezzel elérjük, hogy lényegében
+		átváltunk tizes számrendszerből egyes vagy unáris számrendszerbe.
+	</para>
+	<para>
+		A program állapotmenetgráfja:
+	</para>
+	<figure>
+  		<title>Sample</title>
+  		<mediaobject>
+    			<imageobject>
+     			 	<imagedata fileref="images/allapotgraf.jpg" format="JPG"/>
+   			 </imageobject>
+  		</mediaobject>
+	</figure>
+    </section>        
+        
+    <section>
+        <title>Az a<superscript>n</superscript>b<superscript>n</superscript>c<superscript>n</superscript> nyelv nem környezetfüggetlen</title>
+        <para>
+            Mutass be legalább két környezetfüggő generatív grammatikát, amely ezt a nyelvet generálja!
+        </para>
+	<para>
+		Legenyek: S, X, Y változók, a,b,c konstansok
+	</para>
+	<para>
+		Legyenek megadva a következő következtetési szabályok:
+		S -> abc, S -> aXbc, Xb -> bX, Xc -> Ybcc, bY -> Yb, aY -> aaX, aY -> aa
+	</para>
+	<para>
+		Ekkor a helyettesítéi szabályok alkalmazásával eljutunk a<superscript>n</superscript>b<superscript>n</superscript>c<superscript>n</superscript> -hez, tehát mindig ugyanannyi a, b és c változóink lesznek. Például induljunk ki S-ből:
+	</para>
+	<programlisting>
+	<![CDATA[
+		S (S -> aXbc)
+		aXbc (Xb -> bX)
+		abXc (Xc -> Ybcc)
+		abYbcc (bY -> Yb)
+		aYbbcc (aY -> aa)
+		aabbcc
+	]]>
+	</programlisting>
+	<para>
+		Egy másik ilyen nyelv:
+		Legyenek A,B,C változók, a,b,c konstansok és legyenek megadva a következő helyettesítési szabályok:
+		A -> aAB, A -> aC, CB -> bCc, cB -> Bc, C -> bc
+		Most induljunk ki A-ból:
+	</para>
+	<programlisting>
+	<![CDATA[
+		A (A -> aAB)
+		aAB (A -> aC)
+		aaCB (CB -> bCc)
+		aabCc (C -> bc)
+		aabbcc	
+	]]>
+	</programlisting>
+    </section>        
+                
+    <section>
+        <title>Hivatkozási nyelv</title>
+        <para>
+            A <citation>KERNIGHANRITCHIE</citation> könyv C referencia-kézikönyv/Utasítások melléklete alapján definiáld 
+            BNF-ben a C utasítás fogalmát!
+            Majd mutass be olyan kódcsipeteket, amelyek adott szabvánnyal nem fordulnak (például C89), mással (például C99) igen.
+        </para>
+        <programlisting language = "c">
+		<![CDATA[
+        #include <stdio.h>
+	// compiles in C99, not in C89
+	// -std=C99
+
+	int main()
+	{
+	int n = 5;
+	for (int i = 0; i < n; ++i) {};
+	}
+		]]>
+        </programlisting>
+	    
+	<para>
+	A fenti kód a C nyelv C99-es és újabb verzióiban lefordul, de azelőttiben, mint a C89 nem, mert
+	a C99-es verzió megjelenése előtt a for ciklusok fejlécében nem lehetett változót inicializálni.
+ 	Adott verzióval úgy lehet programot fordítani, hogy ha (gcc és C99-es verzió esetén) a következőképpen adjuk meg az
+	utasítást: gcc programnev.c -std=C99
+	</para>
+    </section>                     
+
+    <section>
+        <title>Saját lexikális elemző</title>
+        <para>
+            Írj olyan programot, ami számolja a bemenetén megjelenő valós számokat! 
+            Nem elfogadható olyan megoldás, amely maga olvassa betűnként a bemenetet, 
+            a feladat lényege, hogy lexert használjunk, azaz óriások vállán álljunk és ne kispályázzunk!
+        </para>
+        <programlisting language = "c">
+          <![CDATA[  
+        %{
+        #include <stdio.h>
+        int realnumbers = 0;
+        %} 
+        digit	[0-9]
+        %%
+        {digit}*(\.{digit}+)?	{++realnumbers; 
+            printf("[realnum=%s %f]", yytext, atof(yytext));}
+        %%
+        int
+        main ()
+        {
+         yylex ();
+         printf("The number of real numbers is %d\n", realnumbers);
+         return 0;
+        }
+          ]]>
+        </programlisting>
+	 <para>
+            A fenti program megszámolja az input stringben lévő valós számokat.
+        </para>
+    </section>                     
+
+    <section>
+        <title>l33t.l</title>
+        <para>
+            Lexelj össze egy l33t ciphert!
+        </para>
+        <programlisting language = "c">
+          <![CDATA[  
+/*
+Forditas:
+$ lex -o l337d1c7.c l337d1c7.l 
+
+Futtatas:
+$ gcc l337d1c7.c -o l337d1c7 -lfl
+(kilépés az input vége, azaz Ctrl+D)
+
+Copyright (C) 2019
+Norbert Bátfai, batfai.norbert@inf.unideb.hu
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+%{
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <time.h>
+  #include <ctype.h>
+
+  #define L337SIZE (sizeof l337d1c7 / sizeof (struct cipher))
+    
+  struct cipher {
+    char c;
+    char *leet[4];
+  } l337d1c7 [] = {
+
+  {'a', {"4", "4", "@", "/-\\"}},
+  {'b', {"b", "8", "|3", "|}"}},
+  {'c', {"c", "(", "<", "{"}},
+  {'d', {"d", "|)", "|]", "|}"}},
+  {'e', {"3", "3", "3", "3"}},
+  {'f', {"f", "|=", "ph", "|#"}},
+  {'g', {"g", "6", "[", "[+"}},
+  {'h', {"h", "4", "|-|", "[-]"}},
+  {'i', {"1", "1", "|", "!"}},
+  {'j', {"j", "7", "_|", "_/"}},
+  {'k', {"k", "|<", "1<", "|{"}},
+  {'l', {"l", "1", "|", "|_"}},
+  {'m', {"m", "44", "(V)", "|\\/|"}},
+  {'n', {"n", "|\\|", "/\\/", "/V"}},
+  {'o', {"0", "0", "()", "[]"}},
+  {'p', {"p", "/o", "|D", "|o"}},
+  {'q', {"q, "9", "O_", "(,)"}},
+  {'r', {"r", "12", "12", "|2"}},
+  {'s', {"s", "5", "$", "$"}},
+  {'t', {"t", "7", "7", "'|'"}},
+  {'u', {"u", "|_|", "(_)", "[_]"}},
+  {'v', {"v", "\\/", "\\/", "\\/"}},
+  {'w', {"w", "VV", "\\/\\/", "(/\\)"}},
+  {'x', {"x", "%", ")(", ")("}},
+  {'y', {"y", "", "", ""}},
+  {'z', {"z", "2", "7_", ">_"}},
+  
+  {'0', {"D", "0", "D", "0"}},
+  {'1', {"I", "I", "L", "L"}},
+  {'2', {"Z", "Z", "Z", "e"}},
+  {'3', {"E", "E", "E", "E"}},
+  {'4', {"h", "h", "A", "A"}},
+  {'5', {"S", "S", "S", "S"}},
+  {'6', {"b", "b", "G", "G"}},
+  {'7', {"T", "T", "j", "j"}},
+  {'8', {"X", "X", "X", "X"}},
+  {'9', {"g", "g", "j", "j"}}
+  
+// https://simple.wikipedia.org/wiki/Leet
+  };
+  
+%}
+%%
+.	{
+	  
+	  int found = 0;
+	  for(int i=0; i<L337SIZE; ++i)
+	  
+	  
+	    if(l337d1c7[i].c == tolower(*yytext))
+	    {
+	    
+	      int r = 1+(int) (100.0*rand()/(RAND_MAX+1.0));
+	    
+              if(r<91)
+	        printf("%s", l337d1c7[i].leet[0]);
+              else if(r<95)
+	        printf("%s", l337d1c7[i].leet[1]);
+	      else if(r<98)
+	        printf("%s", l337d1c7[i].leet[2]);
+	      else 
+	        printf("%s", l337d1c7[i].leet[3]);
+
+	      found = 1;
+	      break;
+	    }
+	    
+	  }
+	  
+	  if(!found)
+	     printf("%c", *yytext);	  
+	  
+	}
+	%%
+	int 
+	main()
+	{
+ 	srand(time(NULL)+getpid());
+ 	yylex();
+  	return 0;
+	}
+
+          ]]>
+        </programlisting>
+	<para>
+		Ez egy lexer által írt program, ami ha lefut, az input stringben betűnkénti helyettesítést végez. 
+		A program elején egy struktúra van megadva, ami lehetővé teszi a saját típusunk deklarálását.
+		Itt a megadott cipher típushoz tartozik egy c karakter és egy leet karakterre mutató mutatók négyelemű tömbje. 
+		Ezután inicializáljuk a cipher típusú l337d1c7 tömbünket. Ezzel véget ér a definícók része.
+	</para>
+	<para>
+		A program következő részében egy for ciklus található, ami végigmegy a l337d1c7 tömbön és megkeresi a betűt, amit
+		inputba megkapott a program, majd generál egy véletlenszerű számot 1-től 100-ig és az eredménytől függően
+		kiválasztja az adott c karakterhez tartozó leet helyettesítési értéket.
+	</para>
+	<para>
+		Lefordítani a "lex -o l337d1c7.c l337d1c7.l" utasítással kell, ahol l337d1c7.c a forrásfájlunk, l337d1c7.l oedig
+		a lexer által írt programunk. A futtatás a "gcc l337d1c7.c -o l337d1c7 -lfl" paranccsal történik.
+	</para>
+    </section>                     
+
+
+    <section>
+        <title>A források olvasása</title>
+        <para>
+            Hogyan olvasod, hogyan értelmezed természetes nyelven az alábbi kódcsipeteket? Például
+            <programlisting><![CDATA[if(signal(SIGINT, jelkezelo)==SIG_IGN)
+    signal(SIGINT, SIG_IGN);]]></programlisting>
+            Ha a SIGINT jel kezelése figyelmen kívül volt hagyva, akkor ezen túl is legyen
+            figyelmen kívül hagyva, ha nem volt figyelmen kívül hagyva, akkor a jelkezelo függvény
+            kezelje. (Miután a <command>man 7 signal</command> lapon megismertem a SIGINT jelet, a
+            <command>man 2 signal</command> lapon pedig a használt rendszerhívást.)
+        </para>
+
+        <caution>
+            <title>Bugok</title>
+            <para>
+                Vigyázz, sok csipet kerülendő, mert bugokat visz a kódba! Melyek ezek és miért? 
+                Ha nem megy ránézésre, elkapja valamelyiket esetleg a splint vagy a frama?
+            </para>
+        </caution>
+            
+        <orderedlist numeration="lowerroman">
+            <listitem>                                    
+                <programlisting><![CDATA[if(signal(SIGINT, SIG_IGN)!=SIG_IGN)
+    signal(SIGINT, jelkezelo);]]></programlisting>
+            </listitem>
+            <listitem>                                    
+                <programlisting><![CDATA[for(i=0; i<5; ++i)]]></programlisting>            
+            </listitem>
+            <listitem>                                    
+
+                <programlisting><![CDATA[for(i=0; i<5; i++)]]></programlisting>            
+            </listitem>
+            <listitem>                                    
+
+                <programlisting><![CDATA[for(i=0; i<5; tomb[i] = i++)]]></programlisting>            
+            </listitem>
+            <listitem>                                    
+
+                <programlisting><![CDATA[for(i=0; i<n && (*d++ = *s++); ++i)]]></programlisting>            
+            </listitem>
+            <listitem>                                    
+
+                <programlisting><![CDATA[printf("%d %d", f(a, ++a), f(++a, a));]]></programlisting>            
+            </listitem>
+            <listitem>                                    
+
+                <programlisting><![CDATA[printf("%d %d", f(a), a);]]></programlisting>            
+            </listitem>
+            <listitem>                                    
+
+                <programlisting><![CDATA[printf("%d %d", f(&a), a);]]></programlisting>            
+            </listitem>
+        </orderedlist>
+        <programlisting language = "c">
+	<![CDATA[
+	    for(i=0; i<5; ++i) /* Legyen i egyenlő 0, ha i kisebb 5-nél akkor inkrementálja egyel, majd nézze meg i értékét újra.*/
+
+	    for(i=0; i<5; i++) /* Legyen i egyenlő 0, ha i kisebb 5-nél akkor nézze meg i értékét újra, majd inkrementálja egyel.*/
+
+	    for(i=0; i<5; tomb[i] = i++) /* Legyen i egyenlő 0, ha i kisebb 5-nél a tomb nevű tömb i-edik eleme legyen egyenlő
+	    i-vel, inkrementálja i-t, majd folytassa a for ciklust. */
+
+	    for(i=0; i<n && (*d++ = *s++); ++i); /* Legyen i egyenlő 0, ha i kisebb n-nél és a s mutató egyenlő az s mutatóval,
+	    inkrementálja őket, majd i-t is inkrementálja és folytassa a for ciklust. */
+
+	    printf("%d %d", f(a, ++a), f(++a, a)); /* a printf() függvény kiírja az f(a, ++a) és f(++a, a) értékeket egymás mellé,
+	    ahol f() egy két paraméterű függvény.  */
+
+	    printf("%d %d", f(a), a); /* a printf() függvény kiírja f(a) és a értékeket egymás mellé, ahoz az f() egy egy paraméterű
+	    függvény. */
+
+	    printf("%d %d", f(&a), a); /* a printf() függvény kiírja f(&a) és a értékeket ahol az f() egy egy paraméterű függvény, &a pedig az a változó címe.*/
+	]]>
+        </programlisting>
+
+    </section>                     
+
+    <section>
+        <title>Logikus</title>
+        <para>
+            Hogyan olvasod természetes nyelven az alábbi Ar nyelvű formulákat?
+        </para>
+        <programlisting language="tex"><![CDATA[$(\forall x \exists y ((x<y)\wedge(y \text{ prím})))$ 
+
+$(\forall x \exists y ((x<y)\wedge(y \text{ prím})\wedge(SSy \text{ prím})))$ 
+
+$(\exists y \forall x (x \text{ prím}) \supset (x<y)) $ 
+
+$(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
+]]></programlisting>
+	<para>
+		A formulák olvasása:
+	</para>
+        <para>
+            	<programlisting language = "tex"> <![CDATA[$(\forall x \exists y ((x<y)\wedge(y \text{ prím})))$]]></programlisting>
+	Bármely x-re létezik olyan y, hogy x kisebb mint y vagy x egy prímszám
+
+		<programlisting language = "tex"> <![CDATA[$(\forall x \exists y ((x<y)\wedge(y \text{ prím})\wedge(SSy \text{ prím})))$ ]]></programlisting>
+	Bármely x-re létezik olyan y, hogy x kisebb mint y vagy y prím vagy y + 2 prím
+		<programlisting language = "tex"> <![CDATA[$(\exists y \forall x (x \text{ prím}) \supset (x<y))]]></programlisting>
+	Létezik olyan y, hogy bármely x vagy prím, vagy kisebb mint y
+		<programlisting language = "tex"> <![CDATA[$(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$]]></programlisting>
+	Létezik olyan y, hogy bármely x-re igaz, hogy y kisebb mint x, amiből következik, hogy x nem prím
+        </para>
+    </section>                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    <section>
+        <title>Deklaráció</title>
+            
+        <para>
+            Vezesd be egy programba (forduljon le) a következőket: 
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>egész</para>                        
+            </listitem>
+            <listitem>
+                <para>egészre mutató mutató</para>                        
+            </listitem>
+            <listitem>
+                <para>egész referenciája</para>                        
+            </listitem>
+            <listitem>
+                <para>egészek tömbje</para>                        
+            </listitem>
+            <listitem>
+                <para>egészek tömbjének referenciája (nem az első elemé)</para>                        
+            </listitem>
+            <listitem>
+                <para>egészre mutató mutatók tömbje</para>                        
+            </listitem>
+            <listitem>
+                <para>egészre mutató mutatót visszaadó függvény</para>                        
+            </listitem>
+            <listitem>
+                <para>egészre mutató mutatót visszaadó függvényre mutató mutató</para>                        
+            </listitem>
+            <listitem>
+                <para>egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó, egészet kapó függvény</para>                        
+            </listitem>            
+            <listitem>
+                <para>függvénymutató egy egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó, egészet kapó függvényre</para>                        
+            </listitem>            
+        </itemizedlist>            
+
+       <para>
+            Mit vezetnek be a programba a következő nevek?
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <programlisting><![CDATA[int a;]]></programlisting>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int *b = &a;]]></programlisting>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int &r = a;]]></programlisting>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int c[5];]]></programlisting>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int (&tr)[5] = c;]]></programlisting>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int *d[5];]]></programlisting>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int *h ();]]></programlisting>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int *(*l) ();]]></programlisting>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int (*v (int c)) (int a, int b)]]></programlisting>            
+            </listitem>  
+            <listitem>
+                <programlisting><![CDATA[int (*(*z) (int)) (int, int);]]></programlisting>            
+            </listitem>  
+		
+        </itemizedlist>
+	<programlisting language = "c++">
+		 <![CDATA[
+		#include <iostream>
+		int main()
+		{
+			int a; //Ez egy egész szám típusú változó.
+			int *b = &a;  //Ez egy a egész számra mutató mutató. Értéke a referenciája.
+			int &r = a;  //Ez egy egész szám referenciája. Értéke a.
+			int c[5];  //Ez egy 5 elemű egészek tömbje.
+			int (&tr)[5] = c;  //Ez egy 5 elemű egészek tömbjének a referenciája.
+			int *d[5];  //Ez egy egészre mutató mutatók tömbje.
+			int *h ();  //Ez egy egészre mutató mutatót visszaadó függvény
+			int *(*l) ();  //Ez egy egészre mutató mutatót visszaadó függvényre mutató mutató
+			int (*v (int c)) (int a, int b);  //Ez egy egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó, egészet kapó függvény
+			int (*(*z) (int)) (int, int);  //Ez egy függvénymutató egy egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó, egészet kapó függvényre
+		}
+		]]>
+	</programlisting>
+    </section>                     
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
