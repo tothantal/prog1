@@ -388,6 +388,15 @@ main (void)
 
 		]]>
         </programlisting>
+	<para>
+		A bogomips egy relatív mértékegység ami a processzor gyorsaságát jellemzi. A név egy szóösszerántása a "bogus MIPS" 
+		kifejezésnek ami nagyjából annyit tesz, hogy valótlan MIPS (milliónyi utasítás/másodperc). Célja a gépek processzorainak az egymással
+		való összehasonlítása. A program maga azt méri, hogy a processzor mennyi idő alatt végez el egy adott ciklust. 
+	</para>
+	<para>
+		A programot ami a mérést végzi úgy hívják, hogy BogoMips, amit Linus Torvalds, a Linux operációs rendszer készítője
+		írt. 
+	</para>
 	    
     </section>                     
 
@@ -472,9 +481,14 @@ double tavolsag(double pagerank[], double pagerank_temp[], int db)
 ]]>
         </programlisting>
         <para>
-            Ez a program egy 4 honlapból álló hálózatra kiszámolja a négy lap Page-Rank 
-            értékét.
+            A PageRank egy olyan algoritmus, amelyet a Google használ a keresőjük által talált találatok sorbarendezéséhez. 
+		Larry Page-ről a Google egyik alapítójáról nevezték el.
         </para>
+	<para>
+		A PageRank lényege, hogy egy honlap annál jobb minőségű, minél több honlap hivatkozik rá. Minél jobb minőségű
+		a honlap, annál feljebb kerül a listán. Ezt a minőséget a PageRank a honlaphoz rendelt százalékkal fejezi ki.
+		Minél nagyobb a százaléka annak az A honlapnak, amelyik B-re hivatkozik, annál nagyobb lesz a B-hez rendelt százalék.
+	</para>
     </section>
 
     <section xml:id="Brun">
