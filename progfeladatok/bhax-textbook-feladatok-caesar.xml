@@ -73,12 +73,14 @@ main ()
         <para>
   		Ez a program a malloc() és a free() függvényeket felhasználva helyet foglal
 		egy alsó háromszög mátrixnak a szabad tárban, majd szabaddá teszi azt a helyet.
-		
+        </para>	
+        <para>
 		A malloc() függvény feladata a megadott számú bájtoknak való memóriablokk lefoglalása. 
 		Visszatérítési értéke egy void típusú pointer. Ebben a programban két malloc() függvény van, mindkettő egy egy 
 		if függvényben. Ez azért van, hogyha az allokáció sikertelen, tehát nullpointer a visszatérési értéke,
 		akkor a program befejeződjön.
-		
+        </para>	
+        <para>
 		A malloc() által foglalt memóriaterület magától nem fog felszabadulni, ezért ezt a program
 		végén nekünk kell megtenni a free() függvénnyel.
 		
@@ -133,7 +135,8 @@ main ()
 		titkosított fájl, aminek az eredetijét visszakaphatjuk, ha az eredményt ismét össze XOR-ozzuk a kulccsal.
 		A XOR jelentése kizáró vagy, elvégezni az ^ operátorral lehet. A XOR B eredménye csak akkor igaz, ha vagy csak 
 		A, vagy csak B igaz. Minden más esetben hamis.
-		
+	</para>
+	<para>
 		Tehát:
 	</para>
 	<programlisting>
