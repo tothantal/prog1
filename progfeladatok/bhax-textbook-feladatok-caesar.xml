@@ -6,7 +6,7 @@
         </keywordset>
     </info>
     <section>
-        <title><type>int **</type> háromszögmátrix</title>
+        <title><type>int **</type> háromszögmátrix</title> EZ@@@
         <para>
            
         </para>
@@ -69,7 +69,9 @@ main ()
     return 0;
 	}]]>
 	</programlisting>
-
+	<para>
+		A program eredményként két alsó háromszögmátrixot ír ki.
+	</para>
         <para>
   		Ez a program a malloc() és a free() függvényeket felhasználva helyet foglal
 		egy alsó háromszög mátrixnak a szabad tárban, majd szabaddá teszi azt a helyet.
@@ -147,54 +149,36 @@ main ()
 	</programlisting>
     </section>        
     <section>
-        <title>Java EXOR titkosító</title>
+        <title>Java EXOR titkosító</title> EZ@@@
         <para>
             Írj egy EXOR titkosítót Java-ban!
         </para>
         <programlisting language = "java">
 <![CDATA[
-public class ExorTitkosító {
-    
-    public ExorTitkosító(String kulcsSzöveg,
-            java.io.InputStream bejövőCsatorna,
-            java.io.OutputStream kimenőCsatorna)
+public class ExorTitkosito {
+    public ExorTitkosito(String kulcsSzoveg,
+            java.io.InputStream bejovoCsatorna,
+            java.io.OutputStream kimenoCsatorna)
             throws java.io.IOException {
-        
-        byte [] kulcs = kulcsSzöveg.getBytes();
+        byte [] kulcs = kulcsSzoveg.getBytes();
         byte [] buffer = new byte[256];
         int kulcsIndex = 0;
-        int olvasottBájtok = 0;
-
-        while((olvasottBájtok =
-                bejövőCsatorna.read(buffer)) != -1) {
-            
-            for(int i=0; i<olvasottBájtok; ++i) {
-                
+        int olvasottBajtok = 0;
+        while((olvasottBajtok = bejovoCsatorna.read(buffer)) != -1) {
+            for(int i=0; i<olvasottBajtok; ++i) {
                 buffer[i] = (byte)(buffer[i] ^ kulcs[kulcsIndex]);
                 kulcsIndex = (kulcsIndex+1) % kulcs.length;
-                
             }
-            
-            kimenőCsatorna.write(buffer, 0, olvasottBájtok);
-            
+            kimenoCsatorna.write(buffer, 0, olvasottBajtok);
         }
-        
     }
-    
-    public static void main(String[] args) {
-        
+public static void main(String[] args) {
         try {
-            
-            new ExorTitkosító(args[0], System.in, System.out);
-            
+            new ExorTitkosito(args[0], System.in, System.out);
         } catch(java.io.IOException e) {
-            
             e.printStackTrace();
-            
         }
-        
     }
-    
 }
 ]]>
         </programlisting>
@@ -457,7 +441,7 @@ compute(nn.exor, exor.data[,1:2])
 	</para>
     </section>        
     <section>
-        <title>Hiba-visszaterjesztéses perceptron</title>
+        <title>Hiba-visszaterjesztéses perceptron</title> EZ@@@ MNIST extra
         <para>
             C++
         </para>
