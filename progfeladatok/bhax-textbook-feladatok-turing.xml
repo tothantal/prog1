@@ -241,7 +241,7 @@ false]]></screen>
     </section>                     
 
     <section>
-        <title>Labdapattogás</title>
+        <title>Labdapattogás</title> EZ@@@
         <para>
             Először if-ekkel, majd bármiféle logikai utasítás vagy kifejezés
             használata nélkül írj egy olyan programot, ami egy labdát pattogtat a karakteres konzolon! (Hogy mit értek
@@ -279,7 +279,7 @@ false]]></screen>
             {
                 system("cls");
                 write_x(abs(height - (x++ % (height * 2 ))), abs(width - (y++ % (width*2))));
-                usleep(10);
+                usleep(100000);
             }
             return 0;
         }
@@ -401,7 +401,7 @@ main (void)
     </section>                     
 
     <section>
-        <title>Helló, Google!</title>
+        <title>Helló, Google!</title> EZ@@@
         <para>
             Írj olyan C programot, amely egy 4 honlapból álló hálózatra kiszámolja a négy lap Page-Rank 
             értékét!
@@ -453,9 +453,9 @@ int main(void)
     		{
 			break;
 		}
-
+	}
 	kiir(PR, 4);
-
+	
 	return 0;
 }
 
