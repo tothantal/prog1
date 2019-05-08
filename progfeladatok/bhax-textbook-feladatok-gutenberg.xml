@@ -507,127 +507,234 @@ mint az int (integer - valósszám), char (character - karakter), float (floatin
 		2.1 A C és a C++ nyelv
 	</para>
 	<para>
-		2.1.1 Függvényparaméterek és visszatérési érték
+		C-ben, ha egy függvénynek nem afunk paramétert, akkor az meghívható tetszőleges mennyiségű paraméterrel, 
+		C++-ban viszont ez azt jelenti, hogy a függvény nem kér paramétert, azaz visszatérési értéke void. 
+		C-ben az alapértelmezett visszatérési érték int, C++-ban ilyen nincs.
 	</para>
 	<para>
-		C-ben, ha egy függvénynek nem afunk paramétert, akkor az meghívható tetszőleges mennyiségű paraméterrel, C++-ban viszont ez azt jelenti, hogy a függvény nem kér paramétert, azaz visszatérési értéke void. C-ben az alapértelmezett visszatérési érték int, C++-ban ilyen nincs.
+		C-vel ellentétben a C++-ban a main függvény kaphat argc és argv parancssori argumentumokat, 
+		amik az argumentumok számát és magukat az argumentumokat jelentik sorban. 
 	</para>
 	<para>
-		2.1.2 A main függvény
+		A C++-ban a C-vel ellentétben létezik bool (boolean - logikai érték) típus. 
+		Értéke lehet true (1) vagy false (0). C-ben a logikai értéket int vagy enummal reprezentálhatjuk. 
 	</para>
 	<para>
-		C-vel ellentétben a C++-ban a main függvény kaphat argc és argv parancssori argumentumokat, amik az argumentumok számát és magukat az argumentumokat jelentik sorban. 
+		A több-bájtos, pl. Unicode karakterek reprezentálására a C-ben rendelkezésre áll a w_char típus, 
+		amihez inkludálni kell a stddef.h és stdlib.h vagy wchar.h fájlokat. A C++ nyelven a wchar_t egy beépített. 
 	</para>
 	<para>
-		2.1.3 A bool típus
+		C++-ban minden olyan helyen állhat változódeklaráció, ahol utasítás állhat. 
+		Ott hozhatjuk létre a változókat, ahol valóban szükségünk van rájuk. 
+		Minden változó onnan használható, ahonnan deklaráljuk
 	</para>
 	<para>
-		A C++-ban a C-vel ellentétben létezik bool (boolean - logikai érték) típus. Értéke lehet true (1) vagy false (0). C-ben a logikai értéket int vagy enummal reprezentálhatjuk. 
+		C-ben minden függvényt a neve azonosít csak, C++-ban nemcsak a név, 
+		de a függvényekhez rendelt argumentumok száma és típusa is segít az azonosításban, 
+		aminek az az eredménye, hogy míg C-ben nem lehet, addig C++-ban lehet túlterhelni függvényt, 
+		azaz két különböző függvény rendelkezhet azonos névvel.
 	</para>
 	<para>
-		2.1.4 A C stílusú több-bájtos sztringek
+		A C++-ban lehetőség van a függvények argumentumainak alapértelmezett érték adására. 
+		Amikor így hívunk függvényeket, nem adunk meg argumentumokat. 
 	</para>
 	<para>
-		A több-bájtos, pl. Unicode karakterek reprezentálására a C-ben rendelkezésre áll a w_char típus, amihez inkludálni kell a stddef.h és stdlib.h vagy wchar.h fájlokat. A C++ nyelven a wchar_t egy beépített. 
-	</para>
-	<para>
-		2.1.5 Változódeklaráció mint utasítás
-	</para>
-	<para>
-		C++-ban minden olyan helyen állhat változódeklaráció, ahol utasítás állhat. Ott hozhatjuk létre a változókat, ahol valóban szükségünk van rájuk. Minden változó onnan használható, ahonnan deklaráljuk
-	</para>
-	<para>
-		2.2 Függvénynevek túlterhelése
-	</para>
-	<para>
-		C-ben minden függvényt a neve azonosít csak, C++-ban nemcsak a név, de a függvényekhez rendelt argumentumok száma és típusa is segít az azonosításban, aminek az az eredménye, hogy míg C-ben nem lehet, addig C++-ban lehet túlterhelni függvényt, azaz két különböző függvény rendelkezhet azonos névvel.
-	</para>
-	<para>
-		2.3 Alapértelmezett függvényargumentumok
-	</para>
-	<para>
-		A C++-ban lehetőség van a függvények argumentumainak alapértelmezett érték adására. Amikor így hívunk függvényeket, nem adunk meg argumentumokat. 
-	</para>
-	<para>
-		2.4 Paraméteradás referenciatípussal
-	</para>
-	<para>
-		C-ben csak érték szerinti paraméteradás történik. Tehát egy függvény csak akkor fog módosítani értéket, hogyha egy arra mutató mutatót adunk meg argumentumnak. Ezzel szemben a C++ kínál referencia szerinti paraméteradást is, amelyel már módosítja az értékeket az adott függvény.
+		C-ben csak érték szerinti paraméteradás történik. 
+		Tehát egy függvény csak akkor fog módosítani értéket, hogyha egy arra mutató mutatót adunk meg argumentumnak. 
+		Ezzel szemben a C++ kínál referencia szerinti paraméteradást is, 
+		amelyel már módosítja az értékeket az adott függvény.
 	</para>
 	<para>
 		3. Objektumok és osztályok
 	</para>
 	<para>
-		3.1 Objektumorientáltság alapelvei
+		Az egyik alapelv amivel foglalkoznuk kell az az egységbezárás (encapsulation) alapelve, 
+		ahol egy bizonyos adatstruktúrát szeretnénk megjeleníteni a programunkban. 
+		Az egységbe záró adatstruktúra neve osztály vagy class. Az osztályok egyedi példányait objektumoknak nevezzük. 
 	</para>
 	<para>
-		Az egyik alapelv amivel foglalkoznuk kell az az egységbezárás (encapsulation) alapelve, ahol egy bizonyos adatstruktúrát szeretnénk megjeleníteni a programunkban. Az egységbe záró adatstruktúra neve osztály vagy class. Az osztályok egyedi példányait objektumoknak nevezzük. 
+		C-ben az egységbezárást a struct kulcsszóval tesszük, struktúra típusba zárunk. 
+		Ugyanazt megtehetjük C++-ban is, de ott már nem csak tagváltozói lehetnek egy struktúrának, 
+		hanem tagfüggvényei is. A tagváltozót gyakran attribútumnak, a tagfüggvényt metódusnak nevezzük.
 	</para>
 	<para>
-		3.2 Egységbezárás C++-ban
-	</para>
-	<para>
-		C-ben az egységbezárást a struct kulcsszóval tesszük, struktúra típusba zárunk. Ugyanazt megtehetjük C++-ban is, de ott már nem csak tagváltozói lehetnek egy struktúrának, hanem tagfüggvényei is. A tagváltozót gyakran attribútumnak, a tagfüggvényt metódusnak nevezzük.
-	</para>
-	<para>
-		3.3 Adatrejtés
-	</para>
-	<para>
-		Adatrejtésre szolgál a private kulcsszó, amivel olyan adatokat adhatunk meg, amelyeket nem szeretnénk semmiképpen sem módosítani.
-	</para>
-	<para>
-		3.4 Konstruktorok és destruktorok
+		Adatrejtésre szolgál a private kulcsszó, amivel olyan adatokat adhatunk meg, 
+		amelyeket nem szeretnénk semmiképpen sem módosítani.
 	</para>
 	<para>
 		A konstruktor lehetőséget kínál arra, hogy az objektumok létrejüttükkör inicializálják magukat. 
-	</para>
-	<para>
 		A konstruktorral szemben a destruktor az objektumok által birtokolt esetleges erőforrások felszabadítsát végzi el. 
 	</para>
-	<para> 
-		3.5 Dinamikus adattagot tartalmazó osztály
+	<para>
+		???? Ide tartozik a dinamikus memóriakezelés, a dinamikus adattagok támogatása és a másoló konstruktor.
 	</para>
 	<para>
-		Ide tartozik a dinamikus memóriakezelés, a dinamikus adattagok támogatása és a másoló konstruktor.
+		Az egyes osztályok feljogosíthatnak globális függvényeket a védett tagjaikhoz való hozzáférésre. 
+		Ezt a friend kulcsszóval tehetjük meg. A konstruktor olyan speciális függvény, 
+		amelynek neve megegyezik az osztály nevével és a példányosításakor automatikusan meghívódik. 
 	</para>
 	<para>
-		3.6 Friend függvények
+		Objektumok állapotát lehet inicializálni konstruktorokban. 
+		Az értékadást és inicializálást a C++ nyelvben meg kell különböztetni. Inicializálás a változók 
+		létrehozásához kapcsolódik, értékadás a már meglévő változóknak való értékmódosítása, 
+		amit az egyenlőségjellel érhetünk el.
 	</para>
 	<para>
-		Az egyes osztályok feljogosíthatnak globális függvényeket a védett tagjaikhoz való hozzáférésre. Ezt a friend kulcsszóval tehetjük meg. A konstruktor olyan speciális függvény, amelynek neve megegyezik az osztály nevével és a példányosításakor automatikusan meghívódik. 
+		Osztályok esetében lehetőség van olyan speciális, 
+		úgynevezett statikus tagváltozók definiálására, 
+		melyek az adott osztályhoz és nem az osztály objektumaihoz tartoznak.
 	</para>
 	<para>
-		3.7 Tagváltozók inicializálása
-	</para>
-	<para>
-		Objektumok állapotát lehet inicializálni konstruktorokban. Az értékadást és inicializálást a C++ nyelvben meg kell különböztetni. Inicializálás a változók létrehozásához kapcsolódik, értékadás a már meglévő változóknak való értékmódosítása, amit az egyenlőségjellel érhetünk el.
-	</para>
-	<para>
-		3.8 Statikus tagok
-	</para>
-	<para>
-		Osztályok esetében lehetőség van olyan speciális, úgynevezett statikus tagváltozók definiálására, melyek az adott osztályhoz és nem az osztály objektumaihoz tartoznak.
-	</para>
-	<para>
-		3.9 Beágyazott definíciók
-	</para>
-	<para>
-		A C++ nyelvben lehetőség van enumeráció-, osztály-, struktúra- és típusdefiníciók osztálydefiníción belüli megadására. Ezeket beágyazott definícióknak nevezzük.
+		A C++ nyelvben lehetőség van enumeráció-, osztály-, struktúra- és típusdefiníciók osztálydefiníción belüli megadására. 
+		Ezeket beágyazott definícióknak nevezzük.
 	</para>
 	<para>
 		6. Operátorok és túlterhelésük
 	</para>
 	<para>
-		6.1 Operátorok általában
+		C-ben az operátorok az argumentumaikon végeznek műveleteket, adott eredményeket a visszatérési értékeik 
+		feldolgozásával használhatjuk. Az operátorok visszatérítési értékét speciális szabályrendszer rögzíti. 
+		A C++ a C-hez képest bevezet néhány új operátort, mint a hatókör-operátor (::) vagy pointer-tag operátorok (.* és ->). 
 	</para>
 	<para>
-		C-ben az operátorok az argumentumaikon végeznek műveleteket, adott eredményeket a visszatérési értékeik feldolgozásával használhatjuk. Az operátorok visszatérítési értékét speciális szabályrendszer rögzíti. A C++ a C-hez képest bevezet néhány új operátort, mint a hatókör-operátor (::) vagy pointer-tag operátorok (.* és ->). 
+		Az operátorok speciális függvények, így a C++-ban túlterhelhetők. 
+		Ezt az operator kulcsszóval érhetjük el, előtte a visszatérési érték, 
+		majd a kulcsszó után maga az operátor jele és utána zárójelekben az operátor argumentumai.
+	</para>
+	<para> EZ@@@@
+		5. A C++ I/O alapjai
 	</para>
 	<para>
-		6.2 Függvényszintaxis és túlterhelés
+		A C nyelvben három előre létrehozott és megnyitott állomány leírója áll rendelkezésünkre rögtön a program indulása után.
+		Ezek a stdin (szabványos bemenet), stdout (szabványos kimenet) és az stderr (szabványos hibakimenet). Az stdin csak olvadsható, a másik
+		kettő csak írható. A C++ adatfolyamokban (stream) gondolkodik, amelyek bájtok egy sorozata. Az adatfolyam típusa lehet istream, vagy outstream.
+		Ezek az adatfolyamok a << illetve >> operátorokat használják.
+		</para>
+	<para>	
+		A C++ I/O használatához fel kell építenünk az iostream állományt. Majd hozzáférhetünk az std::cout -hoz, amely kimeneti lehetőséget biztosít
+		A cout párja a cin, amely bemenetet biztosít. A nyilak mindig az adatáramlás felé mutatnak. 
+		</para>
+	<para>	
+		Istream ragfüggvények: int istream::get() - visszatérése a beolvasott karakter vagy EOF -, 
+		getline - egy sor olvasása sor végéig, vagy más határoló karakterik C++-ban -, read - bináris adat olvasása -,
+		unget, putback - az utolsó karakter visszahelyezése az adatfolyamba.
+		</para>
+	<para>	
+		Ostream tagfüggvények: put - visszatérése a beolvasott karakter vagy EOF -, write - bináris adat beolvasása	
 	</para>
 	<para>
-		Az operátorok speciális függvények, így a C++-ban túlterhelhetők. Ezt az operator kulcsszóval érhetjük el, előtte a visszatérési érték, majd a kulcsszó után maga az operátor jele és utána zárójelekben az operátor argumentumai.
+		Az adatfolyamok manipulálására használhatunk úgynevezett manipulátorokat. Például:
 	</para>
-    </section>        
+	<programlisting language = "C++">
+		cout << flush;
+		
+		cout.flush();
+	</programlisting>
+	<para>
+		Mindkét esetben a cél az, hogy a kimeneti adatfolyam bufferét kiürítsük, ez a felső esetben manipulátorral
+		történik meg, a második esetben pedig tagfüggvénnyel.
+	</para>
+	    <para>
+		    Az I/O manipulátor egy olyan adatfolyam-módosító speciális objektum, amelyet a szokásos kiviteli és bemeneti operátorok
+		    argumentumaként alkalmazunk az adatfolyamokra.
+	    </para>
+	    <para>
+		    A C++ adatfolyamokat használ az állománykezeléshez, amelyeket az iifstream (bemeneti állomány-adatfolyam, input file stream) 
+		    , illetve az ofstream (kimeneti) osztályok reprezentálnak. Az fstream a kétirányú adatfolyamot valósítja meg. 
+		    Az istream és ostream adatfolyamok mindegyike megnyitható olvasásra és írásra is. Az értelmezett műveletek
+		    azonban az adatfolyamok mögött lévő buffer típusától függenek.
+	    </para>
+	    <para>
+		    10. Kivételkezelés
+	    </para>
+	    <para>
+		    A C++ nyelven a hibakezelésre rendelkezésre állnak a kivételek. Ezek a C nyelvtől sokkal struktúráltabb,
+		    átláthatóbb és könnyebben karbantartható megoldást biztosítanak.
+	    </para>
+	    <para>
+		    A kivételkezelés biztosítja, hogy ha hibát detektálunk valahol, akkor a futás azonnal a hibakezelő ágon
+		    folytatódjon. Ez a megoldás nem csak hiba, hanem bármilyen kivételes helyzet esetén használható.
+		    Egy példa:
+	    </para>
+	    <programlisting language = "C++">
+		    <![CDATA[
+		#include <iostream>
+		using namespace std;
+		
+		int main()
+		{
+			try
+			{
+				double d;
+				cout << "Enter a nonzero number: ";
+				cin >> d;
+				if (d == 0)
+					throw "The number can not be zero.";
+				cout << "The reciprocal is: " << 1/d << endl;
+			}
+			catch (const char* exc)
+			{
+				cout << "Error! the error text is: " << exc << endl; 
+			}
+			cout << "Done" << endl;
+		}
+]]>	
+	    </programlisting>
+	    <para>
+		    A fenti program kér a felhasználótól egy számot és a kimenetre írja a reciprokát. 
+		    Ha a felhasználó érvénytelen bemenetként nullát ad meg, akkor jelzi a hibát, és kiírja a 
+		    hiba szövegét szabványos kimenetre. 
+	    </para>
+	    <para>
+		   A kódban egy try-catch blokkot találunk, egy catch ággal. A try védett blokkba írjuk a normál működés kódját,
+		   illetve a catch ágba a hibakezelő kódot. A throw kulcsszó dobja a kivételt, amit ebben a kódban a catch kulcsszó kap el exc 
+		   változóként.
+	    </para>
+	    <para>
+		    Ezek a try-catch blokkok egymásba is ágyazhatóak. Így lehetőség van arra, hogy az adott kivételeket a 
+		    a dobott kivételhez közel, alacsonyabb szinten kezeljük.
+	    </para>
+	    <para>
+		    Az elkapott kivétel a throw kulcsszó paraméter nélküli alkalmazásával újradobható.
+	    </para>
+	    <para>
+		    Egy kivétel dobásakor annak elkapásáig a függvények hívási láncában felfelé haladva az egyes 
+		    függvények lokális változói felszabadulnak. Ezt a folyamatot a hívási verem visszacsévélésének nevezzük. 
+		    Egy kódrészlet:
+	    </para>
+	    <programlisting>
+		    <![CDATA[
+		int main()
+		{
+			try
+			{
+				fl();
+			}
+			catch (const char* errorText)
+			{
+				cerr << errorText << endl;
+			}
+		}
+		
+		void fl()
+		{
+			Fifo fifo; // T.f.h. a Fifo egy általunk megírt osztály
+			f2();
+			...
+		}
+		
+		void f2()
+		{
+			int i = 1;
+			throw "error1";
+		}
+]]>
+	    </programlisting>
+	    <para>
+		    A lépések: 1.: Az f2 kivételt dob. 
+		    2.: az f2-ben definiált i lokális változó felszabadul.
+		    3.: az f1-ben lefoglalt Fifo fifo objektum felszabadul, meghívódik a destruktora.
+		    4.: Lefut a main függvényben lévő catch blokk
+	    </para>
+	</section>        
 </chapter>                
