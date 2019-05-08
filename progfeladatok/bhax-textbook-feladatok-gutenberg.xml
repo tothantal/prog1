@@ -736,5 +736,48 @@ mint az int (integer - valósszám), char (character - karakter), float (floatin
 		    3.: az f1-ben lefoglalt Fifo fifo objektum felszabadul, meghívódik a destruktora.
 		    4.: Lefut a main függvényben lévő catch blokk
 	    </para>
+	    <para>
+		    Még egy példa a kivételkezelésre:
+	    </para>
+	    <programlisting language = "C++">
+<![CDATA[
+		class MessageHandler
+		{
+		public:
+			void ProcessMessages(istream& is)
+			{
+				Message *pMessage;
+				//következő üzenet beolvasása
+				while((pMessage = readNextMessage(is)) != NULL)
+				{
+					try
+					{
+						//kivételt dobhat!
+						pMessage->Process();
+						// ...
+						//Ha végeztünk, felszabadítjuk a Message objektumot.
+						delete pMessage;
+					}
+					catch
+					{
+						delete pMessage;
+						throw;
+					}
+				}
+			}
+		private:
+			Message* readNextMessage(istream& is)
+			{	... }
+		};
+]]>							
+	    </programlisting>
+	    <para>
+		    A MessageHandler egy bemeneti folyamból üzeneteket kiolvasó és azokat feldolgozó osztály.
+	    </para>
+	    <para>
+		    Amennyiben az üzenet feldolgozása során bármilyen kivétel keletkezik, a catch-csel elkapjuk, delszabadítjuk
+		    a helyileg lefoglalt memóriát, majd újradobjuk a kivételt. Ez utóbbi lépés alapvető fontosságú, hiszen a kivétel
+		    lenyelése esetén a hiba rejtve maradna, kiszámíthatatlan következményekkel.
+	    </para>
 	</section>        
 </chapter>                
